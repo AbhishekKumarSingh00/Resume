@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Details</title>
+    <style>
+        * {
+            max-width: 700px;
+            margin: auto;
+        }
+        /*body {
+      min-width: 500px;
+  }*/
+        
+        div {
+            border-radius: 5px;
+        }
+        
+        #header {
+            height: 40px;
+            width: 100%;
+            background-color: #ffcccc;
+            position: fixed;
+            z-index: 1;
+        }
+        
+        #title {
+            margin-left: 3%;
+        }
+        
+        #footer {
+            height: 50px;
+            width: 100%;
+            background-color: #ffcccc;
+            clear: both;
+            position: relative;
+        }
+        
+        .left {
+            height: 1000px;
+            width: 45px;
+            background-color: #e0eeee;
+            float: left;
+            position: fixed;
+        }
+        
+        .right {
+            height: 1000px;
+            width: 45px;
+            background-color: #e0eeee;
+            float: right;
+            position: inherit;
+        }
+        
+        .stuff {
+            display: inline-block;
+            margin-top: 6px;
+            margin-left: 55px;
+            width: 75%;
+            height: 1000px;
+        }
+        
+        p,
+        li {
+            font-family: 'Cormorant Garamond';
+        }
+        
+        .head {
+            font-size: 20px;
+        }
+        
+        #name {
+            font-family: Sacramento;
+            float: right;
+            margin-top: 10px;
+            margin-right: 4%;
+        }
+        
+        a:link {
+            color: green;
+            text-decoration: none;
+            background: transparent;
+        }
+        
+        a :visited {
+            color: black;
+        }
+        
+        a :hover {
+            color: red;
+        }
+        
+        a :active {
+            color: rebeccapurple;
+        }
+        
+        @media only screen and (max-width: 430px) {
+            .left,
+            .right {
+                display: none;
+            }
+            .stuff {
+                width: 100%;
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div class="left"></div>
+    <div class="stuff">
+        <br><br>
+        <!--<h1>Resume</h1>-->
+        <h2>Abhishek Kumar Singh</h2>
+        <h3>abhishek.kumar.singh2101@gmail.com</h3>
+        <h3>+91 8851255456</h3>
+        <hr />
+        <br>
+        <p class="head">Interests</p>
+        <ul>
+            <li>Programming</li>
+            <li>Playing Kabaddi</li>
+        </ul>
+        <p class="head">Skills</p>
+        <ul>
+            <li>Web Design with HTML, CSS, JavaScript & jQuery</li>
+            <li>Android</li>
+            <li>C++</li>
+            <li>C</li>
+            <li>Python</li>
+            <li>XML</li>
+            <li>MS-Office</li>
+            <li>Adobe Photoshop</li>
+        </ul>
+        <p class="head">Education</p>
+        <ul>
+            <a href="http://www.crpfpsdwarka.com/" target="_blank">
+                <li>C.R.P.F Public School, Dwarka</li>
+            </a>
+            <div>Year of completion: 2017</div>
+            <div>Scored 88.40% in XII CBSE Board</div>
+            <!--Link-->
+            <a href="http://www.dtu.ac.in/" target="_blank">
+                <li>Delhi Technological University</li>
+            </a>
+            <div>Year of completion: 2022</div>
+            <div>Branch: Computer Science and Engineering</div>
+        </ul>
+        <p class="head">Internship</p>
+        <ul>
+            <li>Content Writer </li>
+            <a href="https://drive.google.com/file/d/1y_7Hz27FFTceg9NUOH0aR55MWCx2uVVN/view?usp=sharing" target="_blank">Click here to see certificate</a>
+            <li>Mobile App Development </li>
+            <span><a href="https://drive.google.com/file/d/14sZCK9T3gN8zN6a_6xuX4NQ8BPIffPjp/view?usp=sharing" target="_blank">Click here to see certificate</a></span>
+        </ul>
+        <p class="head">Training</p>
+        <ul>
+            <li>Android Application Development</li>
+            <a href="https://drive.google.com/file/d/1Zw1GtPCEtw8sojiOv0o1Z94vh7OMTX0z/view?usp=sharing" target="_blank">Click here to see certificate</a>
+        </ul>
+    </div>
+    <div class="right"></div>
+    <div id="footer">
+        <h2 id="name">Abhishek</h2>
+    </div>
+</body>
+
+</html>

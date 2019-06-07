@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Map</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+        
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #368C7C;
+        }
+        
+        h1 {
+            line-height: 32px;
+            background-color: #202020;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            0px;
+            width: 100%;
+        }
+        
+        #description {
+            padding: 1em;
+        }
+        
+        #dtu_container {
+            padding: 2em 1em;
+        }
+        
+        #dtu_location {
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding-left: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Geolocation</h1>
+    <div id="description">Delhi Technological University, formerly known as the Delhi College of Engineering, is a public engineering university located in New Delhi, India. It was established in 1941 as Delhi Polytechnic and was under the control of the Government of India.</div>
+    <!-- Container for the location of W3W -->
+    <div id="dtu_container">DTU location: <span id="dtu_location"></span></div>
+
+    <div id="map"></div>
+    <br>
+    <div><a href="https://map.what3words.com/measuring.twisting.jukebox?dev=true">
+        See My university location through Google Maps.
+    </a></div>
+    <!-- Replace the value of the key parameter with your own API key. 
+A tutorial how to obtain one is given here: https://goo.gl/vNPPDr
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaABrN3Nei9wJpTTgvqp1jL7hInfu33RM&callback=initMap">
+</script>
+-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE5FlcUue4HlssxRW5wY2nELjO-PFQ374&callback=initMap">
+    </script>
+    <script>
+        // Note: This example requires that you consent to location sharing when
+        // prompted by your browser. If you see the error "The Geolocation service
+        // failed.", it means you probably did not give permission for the browser to
+        // locate you.
+
+        // Initially, the map will be centered to Munich
+        function initMap() {
+            var t = $('span');
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 77.1177,
+                    lng: 28.7501,
+                },
+                zoom: 15,
+            });
+            var infoWindow = new google.maps.InfoWindow({
+                map: map,
+            });
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                t.text('Loading...');
+                // Call W3W
+                navigator.geolocation.getCurrentPosition(show3WordAddress, showError);
+                // Use Google API for refreshing the map
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    };
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Location found.');
+                    map.setCenter(pos);
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                t.text('Geolocation is not supported by this browser.');
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+
+            function showError(error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        t.text('User denied the request for Geolocation.');
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        t.text('Location information is unavailable.');
+                        break;
+                    case error.TIMEOUT:
+                        t.text('The request to get user location timed out.');
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        t.text('An unknown error occurred.');
+                        break;
+                }
+            }
+
+            function show3WordAddress(location) {
+                data = {
+                    key: 'HILVYFUO' // Your W3W Api goes here
+                        ,
+                    coords: location.coords.latitude + ',' + location.coords.longitude,
+                };
+                $.ajax({
+                    url: 'https://api.what3words.com/v2/reverse',
+                    type: 'get',
+                    data: data,
+                    success: function(response) {
+                        t.text(response.words);
+                    },
+                    error: function(xhr, status, error) {
+                        var err = JSON.parse(xhr.responseText);
+                        t.text(err.message);
+                    },
+                });
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
+        }
+    </script>
+
+
+</body>
+
+</html>
